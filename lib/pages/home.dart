@@ -19,6 +19,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       vsync: this,
       initialIndex: 0,
     );
+    // タブの選択が変わった時にウィジェットを再構築するためのリスナーを追加
+    _tabController.addListener(() {
+      setState(() {}); // タブの選択が変わるたびにウィジェットを再構築
+    });
     super.initState();
   }
 
@@ -39,19 +43,25 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           controller: _tabController,
           tabs: [
             Tab(
-              icon: Image.asset(cookActiveIcon),
+              icon: Image.asset(
+                  _tabController.index == 0 ? cookActiveIcon : cookIcon),
             ),
             Tab(
-              icon: Image.asset(craftIcon),
+              icon: Image.asset(
+                  _tabController.index == 1 ? craftActiveIcon : craftIcon),
             ),
             Tab(
-              icon: Image.asset(drawIcon),
+              icon: Image.asset(
+                  _tabController.index == 2 ? drawActiveIcon : drawIcon),
             ),
             Tab(
-              icon: Image.asset(playIcon),
+              icon: Image.asset(
+                  _tabController.index == 3 ? playActiveIcon : playIcon),
             ),
             Tab(
-              icon: Image.asset(experimentIcon),
+              icon: Image.asset(_tabController.index == 4
+                  ? experimentActiveIcon
+                  : experimentIcon),
             ),
           ],
         ),
