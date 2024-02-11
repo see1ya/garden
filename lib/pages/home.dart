@@ -7,11 +7,15 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: customDrawer(),
       appBar: AppBar(
         title: const Text('Garden', style: appBarTextStyle),
+        actions: [
+          Container(
+              padding: EdgeInsets.only(right: 14),
+              child: Image.asset("lib/assets/searchIcon.png"))
+        ],
         centerTitle: true,
-        // backgroundColor: appSeedColor,
-        // elevation: 0,
       ),
       body: Center(
         child: Container(
@@ -26,4 +30,8 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+Drawer customDrawer() {
+  return Drawer();
 }
