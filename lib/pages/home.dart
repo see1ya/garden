@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         title: const Text('Garden', style: appBarTextStyle),
         actions: [
           Container(
-            padding: EdgeInsets.only(right: 14),
+            padding: const EdgeInsets.only(right: 14),
             child: Image.asset(searchIcon),
           )
         ],
