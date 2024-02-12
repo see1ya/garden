@@ -9,3 +9,13 @@ const String experimentActiveIcon = "assets/home/experimentActiveIcon.png";
 const String playIcon = "assets/home/playIcon.png";
 const String playActiveIcon = "assets/home/playActiveIcon.png";
 const String searchIcon = "assets/home/searchIcon.png";
+
+const String homeTabIcon = "assets/bottomNavigation/homeTabIcon.png";
+const String homeActiveTabIcon =
+    "assets/bottomNavigation/homeActiveTabIcon.png";
+const String searchTabIcon = "assets/bottomNavigation/searchTabIcon.png";
+const String searchActiveTabIcon =
+    "assets/bottomNavigation/searchActiveTabIcon.png";
+const String myListTabIcon = "assets/bottomNavigation/myListTabIcon.png";
+const String myListActiveTabIcon =
+    "assets/bottomNavigation/myListActiveTabIcon.png";
