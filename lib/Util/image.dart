@@ -6,8 +6,8 @@ const String drawIcon = "assets/home/drawIcon.png";
 const String drawActiveIcon = "assets/home/drawActiveIcon.png";
 const String experimentIcon = "assets/home/experimentIcon.png";
 const String experimentActiveIcon = "assets/home/experimentActiveIcon.png";
-const String playIcon = "assets/home/playIcon.png";
-const String playActiveIcon = "assets/home/playActiveIcon.png";
+const String outsideIcon = "assets/home/playIcon.png";
+const String outsideActiveIcon = "assets/home/playActiveIcon.png";
 const String searchIcon = "assets/home/searchIcon.png";
 
 const String homeTabIcon = "assets/bottomNavigation/homeTabIcon.png";
