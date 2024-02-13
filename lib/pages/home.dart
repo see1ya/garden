@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:garden/Util/colors.dart';
+import 'package:garden/util/header_tab_enum.dart';
 
-import '../Util/image.dart';
+import '../util/fonts.dart';
+import '../util/image.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,16 +13,17 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late TabController _tabController;
+  late int currentPageIndex;
   @override
   void initState() {
     _tabController = TabController(
-      length: 5,
+      length: 4,
       vsync: this,
       initialIndex: 0,
     );
-    // タブの選択が変わった時にウィジェットを再構築するためのリスナーを追加
+    currentPageIndex = 0;
     _tabController.addListener(() {
-      setState(() {}); // タブの選択が変わるたびにウィジェットを再構築
+      setState(() {});
     });
     super.initState();
   }
@@ -40,41 +42,93 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         ],
         centerTitle: true,
         bottom: TabBar(
+          isScrollable: true,
           controller: _tabController,
-          tabs: [
-            Tab(
-              icon: Image.asset(
-                  _tabController.index == 0 ? cookActiveIcon : cookIcon),
-            ),
-            Tab(
-              icon: Image.asset(
-                  _tabController.index == 1 ? craftActiveIcon : craftIcon),
-            ),
-            Tab(
-              icon: Image.asset(
-                  _tabController.index == 2 ? drawActiveIcon : drawIcon),
-            ),
-            Tab(
-              icon: Image.asset(
-                  _tabController.index == 3 ? playActiveIcon : playIcon),
-            ),
-            Tab(
-              icon: Image.asset(_tabController.index == 4
-                  ? experimentActiveIcon
-                  : experimentIcon),
-            ),
-          ],
+          tabs: _buildTabs(),
         ),
       ),
       body: SafeArea(
         child: TabBarView(
           controller: _tabController,
-          children: [
+          children: const [
             Text('tab1'),
             Text('tab2'),
             Text('tab3'),
             Text('tab4'),
-            Text('tab5'),
+            // Text('tab5'),
+          ],
+        ),
+      ),
+      bottomNavigationBar: NavigationBar(
+        onDestinationSelected: (int index) {
+          setState(() {
+            currentPageIndex = index;
+          });
+        },
+        indicatorColor: Colors.amber,
+        selectedIndex: currentPageIndex,
+        destinations: const <Widget>[
+          NavigationDestination(
+            selectedIcon: Icon(Icons.home),
+            icon: Icon(Icons.home_outlined),
+            label: 'Home',
+          ),
+          NavigationDestination(
+            icon: Badge(child: Icon(Icons.notifications_sharp)),
+            label: 'Notifications',
+          ),
+          NavigationDestination(
+            icon: Badge(
+              label: Text('2'),
+              child: Icon(Icons.messenger_sharp),
+            ),
+            label: 'Messages',
+          ),
+        ],
+      ),
+    );
+  }
+
+  List<Widget> _buildTabs() {
+    final Map<HeaderTab, Map<String, String>> tabInfo = {
+      HeaderTab.cook: {'activeImgPath': cookActiveIcon, 'imgPath': cookIcon},
+      HeaderTab.craft: {'activeImgPath': craftActiveIcon, 'imgPath': craftIcon},
+      HeaderTab.experiment: {
+        'activeImgPath': experimentActiveIcon,
+        'imgPath': experimentIcon
+      },
+      HeaderTab.outside: {
+        'activeImgPath': outsideActiveIcon,
+        'imgPath': outsideIcon
+      },
+    };
+    return tabInfo.entries.map((entry) {
+      return headerTab(
+        activeImgPath: entry.value['activeImgPath']!,
+        imgPath: entry.value['imgPath']!,
+        tab: entry.key,
+      );
+    }).toList();
+  }
+
+  Widget headerTab(
+      {required String activeImgPath,
+      required imgPath,
+      required HeaderTab tab}) {
+    return Tab(
+      height: 55,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 5),
+        width: 73,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Image.asset(
+                _tabController.index == tab.index ? activeImgPath : imgPath),
+            Text(tab.name,
+                style: _tabController.index == tab.index
+                    ? tabBarActiveTextStyle
+                    : tabBarTextStyle),
           ],
         ),
       ),

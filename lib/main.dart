@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:garden/Util/colors.dart';
+import 'package:garden/util/colors.dart';
 import 'package:garden/pages/home.dart';
 
 void main() {
